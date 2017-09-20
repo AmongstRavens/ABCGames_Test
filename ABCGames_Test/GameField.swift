@@ -27,12 +27,12 @@ import AudioToolbox
     }
     private var bonusPoints : Int = 0{
         didSet{
-            //Notify MainViewController
+            notifyView()
         }
     }
     private var penaltyPoints : Int = 0{
         didSet{
-            //Notify MainViewController
+            notifyView()
         }
     }
     private var previousSubviewForPanGesture : UIView?
@@ -56,6 +56,8 @@ import AudioToolbox
     
     @objc private func handleTapGesture(gesture: UITapGestureRecognizer){
         let location = gesture.location(in: self)
+        //ALERT!
+        notifyAboutStart()
         //Get row and column of current tap point
         let row = Int((location.x - xOffset) / size)
         let column = Int((location.y - yOffset) / size)
@@ -129,5 +131,15 @@ import AudioToolbox
         numberOfCapturedViews = 0
         bonusPoints = 0
         penaltyPoints = 0
+    }
+    
+    private func notifyView(){
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name: Notification.Name("Player Interaction"), object: nil, userInfo: ["Bonus" : bonusPoints, "Penalty" : penaltyPoints])
+    }
+    
+    private func notifyAboutStart(){
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name: Notification.Name("Start Game"), object: nil, userInfo: nil)
     }
 }

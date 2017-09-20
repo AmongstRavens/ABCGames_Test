@@ -96,6 +96,7 @@
 			children = (
 				970DF03F1F71B87C0002C299 /* Core Data */,
 				970DF0421F71BD540002C299 /* Score.swift */,
+				970DF0441F71BE4D0002C299 /* GameField.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -103,9 +104,6 @@
 		970DF04B1F71C6BE0002C299 /* View-Model */ = {
 			isa = PBXGroup;
 			children = (
-				970DF0401F71B8A50002C299 /* MainViewController.swift */,
-				970DF0481F71C6980002C299 /* ResultsViewController.swift */,
-				970DF0461F71C6800002C299 /* SettingsViewController.swift */,
 			);
 			name = "View-Model";
 			sourceTree = "<group>";
@@ -114,7 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				970DF02C1F71B84B0002C299 /* Main.storyboard */,
-				970DF0441F71BE4D0002C299 /* GameField.swift */,
+				970DF0401F71B8A50002C299 /* MainViewController.swift */,
+				970DF0461F71C6800002C299 /* SettingsViewController.swift */,
+				970DF0481F71C6980002C299 /* ResultsViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";

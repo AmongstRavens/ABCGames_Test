@@ -85,6 +85,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.5sec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eek-VD-Zzf">
+                                <rect key="frame" x="153" y="91" width="68" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="fYd-vR-cEL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-0.5sec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pk7-VK-Nkd">
+                                <rect key="frame" x="153" y="133" width="68" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="eQs-JR-JG1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -113,12 +131,15 @@
                                 <variation key="heightClass=compact" constant="20"/>
                             </constraint>
                             <constraint firstItem="kiO-3H-Tvb" firstAttribute="centerY" secondItem="Xq1-Xv-fi4" secondAttribute="centerY" id="IcE-PX-Nff"/>
+                            <constraint firstItem="lpk-T6-XFq" firstAttribute="top" secondItem="eek-VD-Zzf" secondAttribute="bottom" id="J7d-qR-gMQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kiO-3H-Tvb" secondAttribute="trailing" constant="20" id="KJ4-Yc-53e"/>
                             <constraint firstItem="Xq1-Xv-fi4" firstAttribute="leading" secondItem="kiO-3H-Tvb" secondAttribute="trailing" constant="41" id="MQD-dS-XF9">
                                 <variation key="heightClass=compact" constant="20"/>
                             </constraint>
                             <constraint firstItem="Xq1-Xv-fi4" firstAttribute="top" secondItem="K7e-3j-KQH" secondAttribute="bottom" constant="15" id="PyH-6u-QnI"/>
                             <constraint firstItem="XH0-QU-pAW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="QpT-ai-Cpv"/>
+                            <constraint firstItem="eek-VD-Zzf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SPh-xf-uHY"/>
+                            <constraint firstItem="pk7-VK-Nkd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sev-Q9-6vZ"/>
                             <constraint firstItem="lpk-T6-XFq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="W9f-00-kNr">
                                 <variation key="heightClass=compact" constant="15"/>
                             </constraint>
@@ -128,6 +149,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="K7e-3j-KQH" secondAttribute="trailing" id="fbk-g9-cch"/>
                             <constraint firstItem="gHs-ay-q4R" firstAttribute="top" secondItem="K7e-3j-KQH" secondAttribute="bottom" constant="15" id="gte-iV-N0S"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xq1-Xv-fi4" secondAttribute="bottom" constant="10" id="iam-S1-dg2"/>
+                            <constraint firstItem="pk7-VK-Nkd" firstAttribute="top" secondItem="lpk-T6-XFq" secondAttribute="bottom" id="mgp-BU-1Wr"/>
                             <constraint firstAttribute="leadingMargin" secondItem="K7e-3j-KQH" secondAttribute="leading" id="n3J-7G-vrs"/>
                             <constraint firstItem="K7e-3j-KQH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="n66-WI-iZm"/>
                             <constraint firstItem="XH0-QU-pAW" firstAttribute="centerY" secondItem="kiO-3H-Tvb" secondAttribute="centerY" id="pj6-XQ-0so"/>
@@ -209,9 +231,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bonusPointsLabel" destination="ge0-vD-VT3" id="Ikx-Lf-zrq"/>
+                        <outlet property="bonusTimeLabel" destination="eek-VD-Zzf" id="Aev-7W-TzG"/>
                         <outlet property="gameFieldView" destination="K7e-3j-KQH" id="eQN-8r-tJF"/>
                         <outlet property="gameTimeLabel" destination="lpk-T6-XFq" id="flZ-b6-68H"/>
                         <outlet property="penaltyPointsLabel" destination="kiO-3H-Tvb" id="HiD-au-6AX"/>
+                        <outlet property="penaltyTimeLabel" destination="pk7-VK-Nkd" id="x5c-Fc-A85"/>
                         <outlet property="serverTimeLabel" destination="XH0-QU-pAW" id="yMZ-zB-fuD"/>
                     </connections>
                 </viewController>

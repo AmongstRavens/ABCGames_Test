@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController{
     @IBOutlet weak var gridSwitch: UISwitch!
     @IBOutlet weak var dimensionPicker: UIPickerView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dimensionPicker.delegate = self
