@@ -19,7 +19,7 @@ import AudioToolbox
     private var size : CGFloat!
     private var numberOfCapturedViews : Int = 0{
         didSet{
-            if (numberOfCapturedViews % 3 == 0) && (numberOfCapturedViews != 0){
+            if (numberOfCapturedViews % 5 == 0) && (numberOfCapturedViews != 0){
                 bonusPoints += 1
             }
             
@@ -27,22 +27,32 @@ import AudioToolbox
     }
     private var bonusPoints : Int = 0{
         didSet{
-            notifyView()
+            GameNotificationCenter.UpdateBonusPoints(points: bonusPoints)
         }
     }
     private var penaltyPoints : Int = 0{
         didSet{
-            notifyView()
+            GameNotificationCenter.UpdatePenaltyPoints(points: penaltyPoints)
         }
     }
     private var previousSubviewForPanGesture : UIView?
+    var isGameStarted : Bool = false {
+        willSet{
+            //To fix some bug
+            if newValue == false{
+                self.removeGestureRecognizer(panGestureRecognizer)
+            }
+        }
+    }
+    private var panGestureRecognizer : UIPanGestureRecognizer!
     
     
+    //Initial settup
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gesture:))))
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:))))
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
     }
     
     override func draw(_ rect: CGRect) {
@@ -50,49 +60,9 @@ import AudioToolbox
         //Clear existing subviews and values
         resetGameField()
         
+        self.addGestureRecognizer(panGestureRecognizer)
         //Create new ones
         createSubview()
-    }
-    
-    @objc private func handleTapGesture(gesture: UITapGestureRecognizer){
-        let location = gesture.location(in: self)
-        //ALERT!
-        notifyAboutStart()
-        //Get row and column of current tap point
-        let row = Int((location.x - xOffset) / size)
-        let column = Int((location.y - yOffset) / size)
-        let selectedSubview = subViewsHashTable["\(row)|\(column)"]
-        if selectedSubview?.backgroundColor == .black{
-            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            penaltyPoints += 1
-        } else {
-            selectedSubview?.backgroundColor = .black
-        }
-    }
-    
-    @objc private func handlePanGesture(gesture: UIPanGestureRecognizer){
-        let location = gesture.location(in: self)
-        //Get row and column of current tap point
-        let row = Int((location.x - xOffset) / size)
-        let column = Int((location.y - yOffset) / size)
-        let selectedSubview = subViewsHashTable["\(row)|\(column)"]
-        if selectedSubview != previousSubviewForPanGesture{
-            previousSubviewForPanGesture = selectedSubview
-            if selectedSubview?.backgroundColor == .black{
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                penaltyPoints += 1
-            } else {
-                selectedSubview?.backgroundColor = .black
-                numberOfCapturedViews += 1
-            }
-        }
-        
-        
-        if gesture.state == .cancelled || gesture.state == .ended || gesture.state == .failed{
-            numberOfCapturedViews = 0
-        }
-        
-        
     }
     
     private func createSubview(){
@@ -127,19 +97,63 @@ import AudioToolbox
         for (_, value) in subViewsHashTable{
             value.removeFromSuperview()
         }
+        isGameStarted = false
         subViewsHashTable.removeAll()
         numberOfCapturedViews = 0
         bonusPoints = 0
         penaltyPoints = 0
     }
     
-    private func notifyView(){
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.post(name: Notification.Name("Player Interaction"), object: nil, userInfo: ["Bonus" : bonusPoints, "Penalty" : penaltyPoints])
+    
+    //MARK: Gesture Recognizers Handlers
+    
+    @objc private func handleTapGesture(gesture: UITapGestureRecognizer){
+        if !isGameStarted{
+            GameNotificationCenter.StartGame()
+            isGameStarted = true
+        }
+        
+        let location = gesture.location(in: self)
+
+        //Get row and column of current tap point
+        let row = Int((location.x - xOffset) / size)
+        let column = Int((location.y - yOffset) / size)
+        let selectedSubview = subViewsHashTable["\(row)|\(column)"]
+        if selectedSubview?.backgroundColor == .black{
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            penaltyPoints += 1
+        } else {
+            selectedSubview?.backgroundColor = .black
+        }
     }
     
-    private func notifyAboutStart(){
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.post(name: Notification.Name("Start Game"), object: nil, userInfo: nil)
+    @objc private func handlePanGesture(gesture: UIPanGestureRecognizer){
+        if !isGameStarted{
+            GameNotificationCenter.StartGame()
+            isGameStarted = true
+        }
+        
+        let location = gesture.location(in: self)
+        //Get row and column of current tap point
+        let row = Int((location.x - xOffset) / size)
+        let column = Int((location.y - yOffset) / size)
+        let selectedSubview = subViewsHashTable["\(row)|\(column)"]
+        if selectedSubview != previousSubviewForPanGesture{
+            previousSubviewForPanGesture = selectedSubview
+            if selectedSubview?.backgroundColor == .black{
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                penaltyPoints += 1
+            } else {
+                selectedSubview?.backgroundColor = .black
+                numberOfCapturedViews += 1
+            }
+        }
+        
+        
+        if gesture.state == .cancelled || gesture.state == .ended || gesture.state == .failed{
+            numberOfCapturedViews = 0
+        }
+        
+        
     }
 }

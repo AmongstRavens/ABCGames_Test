@@ -13,10 +13,14 @@
 		970DF0331F71B84B0002C299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970DF0321F71B84B0002C299 /* Assets.xcassets */; };
 		970DF0361F71B84B0002C299 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970DF0341F71B84B0002C299 /* LaunchScreen.storyboard */; };
 		970DF0411F71B8A50002C299 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970DF0401F71B8A50002C299 /* MainViewController.swift */; };
-		970DF0431F71BD540002C299 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970DF0421F71BD540002C299 /* Score.swift */; };
 		970DF0451F71BE4D0002C299 /* GameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970DF0441F71BE4D0002C299 /* GameField.swift */; };
 		970DF0471F71C6800002C299 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970DF0461F71C6800002C299 /* SettingsViewController.swift */; };
 		970DF0491F71C6980002C299 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970DF0481F71C6980002C299 /* ResultsViewController.swift */; };
+		9734BCAD1F73BBFD00AE41E9 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9734BCAC1F73BBFD00AE41E9 /* NotificationCenter.swift */; };
+		9734BCAF1F73D3B000AE41E9 /* ScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9734BCAE1F73D3B000AE41E9 /* ScoreViewModel.swift */; };
+		9734BCB11F73D6EB00AE41E9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9734BCB01F73D6EB00AE41E9 /* CoreDataStack.swift */; };
+		97C5FF1C1F75945C0076B4FB /* Score+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5FF1A1F75945C0076B4FB /* Score+CoreDataClass.swift */; };
+		97C5FF1D1F75945C0076B4FB /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5FF1B1F75945C0076B4FB /* Score+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +32,14 @@
 		970DF0351F71B84B0002C299 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		970DF0371F71B84B0002C299 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		970DF0401F71B8A50002C299 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../MainViewController.swift; sourceTree = "<group>"; };
-		970DF0421F71BD540002C299 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		970DF0441F71BE4D0002C299 /* GameField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameField.swift; sourceTree = "<group>"; };
 		970DF0461F71C6800002C299 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		970DF0481F71C6980002C299 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		9734BCAC1F73BBFD00AE41E9 /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		9734BCAE1F73D3B000AE41E9 /* ScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewModel.swift; sourceTree = "<group>"; };
+		9734BCB01F73D6EB00AE41E9 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		97C5FF1A1F75945C0076B4FB /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataClass.swift"; sourceTree = "<group>"; };
+		97C5FF1B1F75945C0076B4FB /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +94,9 @@
 		970DF03F1F71B87C0002C299 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				97C5FF1A1F75945C0076B4FB /* Score+CoreDataClass.swift */,
+				97C5FF1B1F75945C0076B4FB /* Score+CoreDataProperties.swift */,
+				9734BCB01F73D6EB00AE41E9 /* CoreDataStack.swift */,
 				970DF02F1F71B84B0002C299 /* ABCGames_Test.xcdatamodeld */,
 			);
 			name = "Core Data";
@@ -95,8 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				970DF03F1F71B87C0002C299 /* Core Data */,
-				970DF0421F71BD540002C299 /* Score.swift */,
-				970DF0441F71BE4D0002C299 /* GameField.swift */,
+				9734BCAC1F73BBFD00AE41E9 /* NotificationCenter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -104,6 +114,9 @@
 		970DF04B1F71C6BE0002C299 /* View-Model */ = {
 			isa = PBXGroup;
 			children = (
+				970DF0401F71B8A50002C299 /* MainViewController.swift */,
+				970DF0441F71BE4D0002C299 /* GameField.swift */,
+				9734BCAE1F73D3B000AE41E9 /* ScoreViewModel.swift */,
 			);
 			name = "View-Model";
 			sourceTree = "<group>";
@@ -112,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				970DF02C1F71B84B0002C299 /* Main.storyboard */,
-				970DF0401F71B8A50002C299 /* MainViewController.swift */,
 				970DF0461F71C6800002C299 /* SettingsViewController.swift */,
 				970DF0481F71C6980002C299 /* ResultsViewController.swift */,
 			);
@@ -192,12 +204,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97C5FF1D1F75945C0076B4FB /* Score+CoreDataProperties.swift in Sources */,
 				970DF0411F71B8A50002C299 /* MainViewController.swift in Sources */,
 				970DF0311F71B84B0002C299 /* ABCGames_Test.xcdatamodeld in Sources */,
 				970DF0451F71BE4D0002C299 /* GameField.swift in Sources */,
 				970DF0491F71C6980002C299 /* ResultsViewController.swift in Sources */,
-				970DF0431F71BD540002C299 /* Score.swift in Sources */,
+				9734BCB11F73D6EB00AE41E9 /* CoreDataStack.swift in Sources */,
+				9734BCAD1F73BBFD00AE41E9 /* NotificationCenter.swift in Sources */,
+				9734BCAF1F73D3B000AE41E9 /* ScoreViewModel.swift in Sources */,
 				970DF0291F71B84B0002C299 /* AppDelegate.swift in Sources */,
+				97C5FF1C1F75945C0076B4FB /* Score+CoreDataClass.swift in Sources */,
 				970DF0471F71C6800002C299 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +339,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L42U362EAE;
 				INFOPLIST_FILE = ABCGames_Test/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-00wd--wd.ABCGames-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -337,7 +353,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L42U362EAE;
 				INFOPLIST_FILE = ABCGames_Test/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-00wd--wd.ABCGames-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";

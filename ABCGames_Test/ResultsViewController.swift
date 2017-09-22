@@ -11,6 +11,13 @@ import UIKit
 class ResultsViewController: UIViewController {
 
     @IBOutlet weak var scoreTableView: UITableView!
+    lazy var scores : [Score] = {
+        if let fetchedScores = ScoreViewModel.fetchEntitiesFromDatabase(){
+            return fetchedScores
+        } else {
+            return [Score]()
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +29,15 @@ class ResultsViewController: UIViewController {
 //MARK : UITableViewDelegate/DataSource
 extension ResultsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return scores.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Score Cell", for: indexPath) as! ScoreTableViewCell
-        cell.bonusPointsLabel.text = "10"
-        cell.penaltyPointsLabel.text = "10"
+        cell.bonusPointsLabel.text = "\(scores[indexPath.row].bonusPoints)"
+        cell.penaltyPointsLabel.text = "\(scores[indexPath.row].penaltyPoints)"
         cell.serverTimeLabel.text = "20:20"
-        cell.totalTimeLabel.text = "00:20"
+        cell.totalTimeLabel.text = scores[indexPath.row].totalTime ?? "0"
         return cell
     }
 }
