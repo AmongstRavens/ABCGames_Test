@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
     private var timeSeconds : Int = 5
     private var timeMileseconds : Int = 0
     private var timer = Timer()
+    private var serverTimetimer = Timer()
     private var totalTimeSeconds : Int = 0
     private var totalTimeMileseconds : Int = 0
     private var bonusPoints : Int = 0{
@@ -38,6 +39,13 @@ class MainViewController: UIViewController {
     private var penaltyPoints : Int = 0{
         didSet{
             penaltyPointsLabel.text = "\(penaltyPoints)"
+        }
+    }
+    private var timestamp : Double?{
+        didSet{
+            if timestamp != nil{
+                updateClock(with: timestamp!)
+            }
         }
     }
     
@@ -54,6 +62,8 @@ class MainViewController: UIViewController {
         notificationCenter.addObserver(forName: Notification.Name("Bonus Points"), object: nil, queue: nil, using: catchBonusPointsNotification)
         notificationCenter.addObserver(forName: Notification.Name("Penalty Points"), object: nil, queue: nil, using: catchPenaltyPointsNotification)
         notificationCenter.addObserver(forName: Notification.Name("Start Game"), object: nil, queue: nil, using: startGame)
+        
+        getDate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,6 +144,10 @@ class MainViewController: UIViewController {
         }
     }
     
+    @objc private func serverTimeTimerStepper(){
+        timestamp! -= 1000.0
+    }
+    
     private func finishGame(){
         timer.invalidate()
         //Add score into database
@@ -156,5 +170,51 @@ class MainViewController: UIViewController {
         alertVC.addAction(doneAction)
         present(alertVC, animated: true, completion: nil)
     }
-
+    
+    //Start clock timer
+    private func updateClock(with timestamp: Double){
+        let date = NSDate(timeIntervalSince1970: TimeInterval(timestamp / 1000))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = DateFormatter.Style.none
+        dateFormatter.timeZone = TimeZone.current
+        let localDate = dateFormatter.string(from: date as Date)
+        serverTimeLabel.text = localDate
+    }
+    
+    //Get server timestamp
+    private func getDate(){
+        let url = URL(string: "https://abcgames.khorost.net/api/?device=uuid22&ppa=zt_getInfo&app_version=1.5.0070&type=test&lang=ru")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard data != nil, error == nil else{
+                print("Unable to get server time : \(String(describing: error?.localizedDescription))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("Wrong status code : \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            DispatchQueue.main.async {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : Any]
+                    if let timestamp = (json["data"] as! [String : Any])["timestamp"] as? Double{
+                        self.timestamp = timestamp
+                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MainViewController.serverTimeTimerStepper), userInfo: nil, repeats: true)
+                    }
+                    
+                } catch{
+                    print("Unable to parse data : \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        dataTask.resume()
+        
+    }
 }
