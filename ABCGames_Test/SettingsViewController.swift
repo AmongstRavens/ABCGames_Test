@@ -11,7 +11,6 @@ import UIKit
 class SettingsViewController: UIViewController{
 
     @IBOutlet weak var serverTimeSwitch: UISwitch!
-    @IBOutlet weak var gridSwitch: UISwitch!
     @IBOutlet weak var dimensionPicker: UIPickerView!
     
     
@@ -19,6 +18,7 @@ class SettingsViewController: UIViewController{
         super.viewDidLoad()
         dimensionPicker.delegate = self
         dimensionPicker.dataSource = self
+        serverTimeSwitch.isOn = UserDefaults.standard.object(forKey: "Server Time") as? Bool ?? true
     }
     
     
@@ -26,6 +26,25 @@ class SettingsViewController: UIViewController{
     }
     
     @IBAction func applySettings(_ sender: UIButton) {
+        UserDefaults.standard.set(serverTimeSwitch.isOn, forKey: "Server Time")
+        let pickerIndexForXDimension = dimensionPicker.selectedRow(inComponent: 0)
+        UserDefaults.standard.set(5 + pickerIndexForXDimension, forKey: "xDimension")
+        
+        let pickerIndexForYDimension = dimensionPicker.selectedRow(inComponent: 1)
+        UserDefaults.standard.set(5 + pickerIndexForYDimension, forKey: "yDimension")
+        
+        //Access view via navigation controller stack
+        if let mainVC = navigationController?.viewControllers[0] as? MainViewController{
+            //Check if we should update UI
+            if pickerIndexForXDimension + 5 != mainVC.gameFieldView.xDimension || pickerIndexForYDimension + 5 != mainVC.gameFieldView.yDimension{
+                mainVC.gameFieldView.xDimension = 5 + pickerIndexForXDimension
+                mainVC.gameFieldView.yDimension = 5 + pickerIndexForYDimension
+                mainVC.gameFieldView.setNeedsDisplay()
+            }
+        }
+        
+        //Dismiss current view controller
+        navigationController?.popViewController(animated: true)
     }
     
 }

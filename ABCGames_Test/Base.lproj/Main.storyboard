@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -435,36 +436,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRI-zH-5f1">
-                                        <rect key="frame" x="19.5" y="169" width="337.5" height="31"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field grid " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkc-Kz-ohu">
-                                                <rect key="frame" x="0.0" y="0.0" width="288.5" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="psk-30-woU">
-                                                <rect key="frame" x="288.5" y="0.0" width="51" height="31"/>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dK-kJ-oO5">
-                                        <rect key="frame" x="19.5" y="238" width="337.5" height="31"/>
+                                        <rect key="frame" x="37.5" y="179" width="300" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1L-IZ-5XR">
-                                                <rect key="frame" x="0.0" y="0.0" width="288.5" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="251" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5B-ut-Ak2">
-                                                <rect key="frame" x="288.5" y="0.0" width="51" height="31"/>
+                                                <rect key="frame" x="251" y="0.0" width="51" height="31"/>
                                             </switch>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="mZk-Xy-4v1">
-                                        <rect key="frame" x="19.5" y="309" width="337.5" height="40"/>
+                                        <rect key="frame" x="37.5" y="250" width="300" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-Tr-9IP">
                                                 <rect key="frame" x="0.0" y="0.0" width="59" height="40"/>
@@ -475,7 +462,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgg-al-B4q">
-                                                <rect key="frame" x="278.5" y="0.0" width="59" height="40"/>
+                                                <rect key="frame" x="241" y="0.0" width="59" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="Apply"/>
                                                 <connections>
@@ -489,15 +476,13 @@
                                     <constraint firstItem="mZk-Xy-4v1" firstAttribute="centerX" secondItem="bD6-HO-bHW" secondAttribute="centerX" id="0lJ-sF-nx7"/>
                                     <constraint firstAttribute="trailing" secondItem="dPq-ga-dF2" secondAttribute="trailing" constant="10" id="5FU-OH-RmA"/>
                                     <constraint firstItem="dPq-ga-dF2" firstAttribute="centerX" secondItem="bD6-HO-bHW" secondAttribute="centerX" id="CyC-qq-kEM"/>
-                                    <constraint firstItem="4dK-kJ-oO5" firstAttribute="top" secondItem="bkc-Kz-ohu" secondAttribute="bottom" constant="38" id="EgV-pI-6yc"/>
+                                    <constraint firstItem="4dK-kJ-oO5" firstAttribute="top" secondItem="pUa-RJ-DWu" secondAttribute="bottom" constant="20" id="Eir-wS-SJT"/>
                                     <constraint firstItem="dPq-ga-dF2" firstAttribute="top" secondItem="bD6-HO-bHW" secondAttribute="top" constant="20" id="Hoz-X7-hT4"/>
                                     <constraint firstItem="pUa-RJ-DWu" firstAttribute="top" secondItem="dPq-ga-dF2" secondAttribute="bottom" constant="15" id="Ipb-MT-NYc"/>
-                                    <constraint firstItem="aRI-zH-5f1" firstAttribute="top" secondItem="pUa-RJ-DWu" secondAttribute="bottom" constant="10" id="Mb6-Mi-CxC"/>
                                     <constraint firstItem="pUa-RJ-DWu" firstAttribute="centerX" secondItem="bD6-HO-bHW" secondAttribute="centerX" id="QsV-bD-42J"/>
-                                    <constraint firstItem="aRI-zH-5f1" firstAttribute="centerX" secondItem="bD6-HO-bHW" secondAttribute="centerX" id="Vtt-yM-KKB"/>
                                     <constraint firstAttribute="bottom" secondItem="mZk-Xy-4v1" secondAttribute="bottom" constant="30" id="ZKF-3p-nuR"/>
                                     <constraint firstItem="mZk-Xy-4v1" firstAttribute="top" secondItem="4dK-kJ-oO5" secondAttribute="bottom" constant="40" id="ayS-qw-IvS"/>
-                                    <constraint firstItem="4dK-kJ-oO5" firstAttribute="width" secondItem="aRI-zH-5f1" secondAttribute="width" id="cFy-bS-3fK"/>
+                                    <constraint firstItem="4dK-kJ-oO5" firstAttribute="width" secondItem="pUa-RJ-DWu" secondAttribute="width" id="k0S-Km-fFU"/>
                                     <constraint firstItem="mZk-Xy-4v1" firstAttribute="width" secondItem="4dK-kJ-oO5" secondAttribute="width" id="qKe-1I-Z2h"/>
                                     <constraint firstItem="dPq-ga-dF2" firstAttribute="leading" secondItem="bD6-HO-bHW" secondAttribute="leading" constant="10" id="tr9-Yn-W4a"/>
                                     <constraint firstItem="4dK-kJ-oO5" firstAttribute="centerX" secondItem="bD6-HO-bHW" secondAttribute="centerX" id="yi1-No-yhs"/>
@@ -509,14 +494,12 @@
                             <constraint firstItem="pUa-RJ-DWu" firstAttribute="width" secondItem="EVn-Yn-omK" secondAttribute="width" multiplier="4:5" id="65r-EP-wva"/>
                             <constraint firstItem="bD6-HO-bHW" firstAttribute="leading" secondItem="EVn-Yn-omK" secondAttribute="leading" id="6xa-zS-bcg"/>
                             <constraint firstItem="EPf-yo-7sL" firstAttribute="top" secondItem="bD6-HO-bHW" secondAttribute="bottom" id="AQg-yS-PgR"/>
-                            <constraint firstItem="aRI-zH-5f1" firstAttribute="width" secondItem="EVn-Yn-omK" secondAttribute="width" multiplier="9:10" id="BIQ-T8-DEj"/>
                             <constraint firstItem="bD6-HO-bHW" firstAttribute="top" secondItem="10P-F2-28P" secondAttribute="bottom" id="QuC-vl-eDg"/>
                             <constraint firstAttribute="trailing" secondItem="bD6-HO-bHW" secondAttribute="trailing" id="xtW-EB-37h"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dimensionPicker" destination="pUa-RJ-DWu" id="n1z-IN-Ync"/>
-                        <outlet property="gridSwitch" destination="psk-30-woU" id="1Kf-gr-Mod"/>
                         <outlet property="serverTimeSwitch" destination="V5B-ut-Ak2" id="Ou7-U9-YsW"/>
                     </connections>
                 </viewController>

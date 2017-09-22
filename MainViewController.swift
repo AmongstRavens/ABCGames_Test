@@ -56,6 +56,19 @@ class MainViewController: UIViewController {
         notificationCenter.addObserver(forName: Notification.Name("Start Game"), object: nil, queue: nil, using: startGame)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //Hide server time
+        let sholudHideServerTime = UserDefaults.standard.object(forKey: "Server Time") as? Bool
+        if sholudHideServerTime != nil {
+            serverTimeLabel.isHidden = !sholudHideServerTime!
+            serverTimeLabel.setNeedsDisplay()
+        } else {
+            serverTimeLabel.isHidden = false
+            serverTimeLabel.setNeedsDisplay()
+        }
+    }
+    
     private func catchBonusPointsNotification(notification: Notification){
         guard let userInfo = notification.userInfo,
             let bonusPoints  = userInfo["points"] as? Int

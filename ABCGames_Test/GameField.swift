@@ -11,8 +11,25 @@ import UIKit
 import AudioToolbox
 
 @IBDesignable class GameField : UIView{
-    var xDimension : Int = 11
-    var yDimension : Int = 10
+    var xDimension : Int = {
+        let value : Int? = UserDefaults.standard.object(forKey: "xDimension") as? Int
+        if let unwrappedValue = value{
+            return unwrappedValue
+        } else {
+            //Default value
+            return 10
+        }
+    }()
+    var yDimension : Int = {
+        let value : Int? = UserDefaults.standard.object(forKey: "yDimension") as? Int
+        if let unwrappedValue = value{
+            return unwrappedValue
+        } else {
+            //Default value
+            return 10
+        }
+    }()
+    
     private var subViewsHashTable = [String : UIView]()
     private var xOffset : CGFloat!
     private var yOffset : CGFloat!
