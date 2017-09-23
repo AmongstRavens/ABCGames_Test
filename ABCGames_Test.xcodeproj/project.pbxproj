@@ -21,6 +21,7 @@
 		9734BCB11F73D6EB00AE41E9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9734BCB01F73D6EB00AE41E9 /* CoreDataStack.swift */; };
 		97C5FF1C1F75945C0076B4FB /* Score+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5FF1A1F75945C0076B4FB /* Score+CoreDataClass.swift */; };
 		97C5FF1D1F75945C0076B4FB /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5FF1B1F75945C0076B4FB /* Score+CoreDataProperties.swift */; };
+		97C5FF211F75DD230076B4FB /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5FF201F75DD220076B4FB /* AppUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		9734BCB01F73D6EB00AE41E9 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		97C5FF1A1F75945C0076B4FB /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataClass.swift"; sourceTree = "<group>"; };
 		97C5FF1B1F75945C0076B4FB /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		97C5FF201F75DD220076B4FB /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				970DF0401F71B8A50002C299 /* MainViewController.swift */,
+				97C5FF201F75DD220076B4FB /* AppUtility.swift */,
 				970DF0441F71BE4D0002C299 /* GameField.swift */,
 				9734BCAE1F73D3B000AE41E9 /* ScoreViewModel.swift */,
 			);
@@ -212,6 +215,7 @@
 				9734BCB11F73D6EB00AE41E9 /* CoreDataStack.swift in Sources */,
 				9734BCAD1F73BBFD00AE41E9 /* NotificationCenter.swift in Sources */,
 				9734BCAF1F73D3B000AE41E9 /* ScoreViewModel.swift in Sources */,
+				97C5FF211F75DD230076B4FB /* AppUtility.swift in Sources */,
 				970DF0291F71B84B0002C299 /* AppDelegate.swift in Sources */,
 				97C5FF1C1F75945C0076B4FB /* Score+CoreDataClass.swift in Sources */,
 				970DF0471F71C6800002C299 /* SettingsViewController.swift in Sources */,

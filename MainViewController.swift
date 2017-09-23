@@ -17,12 +17,12 @@ class MainViewController: UIViewController {
     @IBOutlet weak var penaltyPointsLabel: UILabel!
     @IBOutlet weak var penaltyTimeLabel: UILabel!{
         didSet{
-            penaltyTimeLabel.textColor = .white
+            penaltyTimeLabel.alpha = 0
         }
     }
     @IBOutlet weak var bonusTimeLabel: UILabel!{
         didSet{
-            bonusTimeLabel.textColor = .white
+            bonusTimeLabel.alpha = 0
         }
     }
     private var timeSeconds : Int = 5
@@ -34,11 +34,17 @@ class MainViewController: UIViewController {
     private var bonusPoints : Int = 0{
         didSet{
             bonusPointsLabel.text = "\(bonusPoints)"
+            if bonusPoints != 0{
+                flash(view: bonusTimeLabel)
+            }
         }
     }
     private var penaltyPoints : Int = 0{
         didSet{
             penaltyPointsLabel.text = "\(penaltyPoints)"
+            if penaltyPoints != 0{
+                flash(view: penaltyTimeLabel)
+            }
         }
     }
     private var timestamp : Double?{
@@ -46,6 +52,20 @@ class MainViewController: UIViewController {
             if timestamp != nil{
                 updateClock(with: timestamp!)
             }
+        }
+    }
+    private var isGameStarted : Bool = false
+    
+    @IBAction func settingsButtonPressed(_ sender: UIBarButtonItem) {
+        if !isGameStarted{
+            performSegue(withIdentifier: "Show Settings View Controller", sender: sender)
+        }
+    }
+    
+    
+    @IBAction func resultsButtonPressed(_ sender: UIBarButtonItem) {
+        if !isGameStarted{
+            performSegue(withIdentifier: "Show Results View Controller", sender: sender)
         }
     }
     
@@ -117,6 +137,8 @@ class MainViewController: UIViewController {
     }
     
     private func startGame(notification: Notification){
+        AppUtility.lockOrientation()
+        isGameStarted = true
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(MainViewController.stepper), userInfo: nil, repeats: true)
     }
     
@@ -145,10 +167,11 @@ class MainViewController: UIViewController {
     }
     
     @objc private func serverTimeTimerStepper(){
-        timestamp! -= 1000.0
+        timestamp! += 1000.0
     }
     
     private func finishGame(){
+        isGameStarted = false
         timer.invalidate()
         //Add score into database
         ScoreViewModel.addScoreInCoreData(penaltyPoints: penaltyPoints, bonusPoints: bonusPoints, totalTime: "\(totalTimeSeconds):\(totalTimeMileseconds)0", serverTime: "")
@@ -162,6 +185,7 @@ class MainViewController: UIViewController {
         
         //Redraw game field
         gameFieldView.setNeedsDisplay()
+        AppUtility.unlockOrientation()
     }
     
     private func showResults(){
@@ -205,6 +229,7 @@ class MainViewController: UIViewController {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : Any]
                     if let timestamp = (json["data"] as! [String : Any])["timestamp"] as? Double{
                         self.timestamp = timestamp
+                        //Run timer
                         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MainViewController.serverTimeTimerStepper), userInfo: nil, repeats: true)
                     }
                     
@@ -216,5 +241,15 @@ class MainViewController: UIViewController {
         
         dataTask.resume()
         
+    }
+    
+    func flash(view : UIView) {
+        let flash = CABasicAnimation(keyPath: "opacity")
+        flash.duration = 0.5
+        flash.fromValue = 0
+        flash.toValue = 1
+        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        flash.autoreverses = true
+        view.layer.add(flash, forKey: nil)
     }
 }

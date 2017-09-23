@@ -16,7 +16,7 @@ import AudioToolbox
         if let unwrappedValue = value{
             return unwrappedValue
         } else {
-            //Default value
+            //Defaut value
             return 10
         }
     }()
