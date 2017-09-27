@@ -16,13 +16,20 @@ class SettingsViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dimensionPicker.delegate = self
-        dimensionPicker.dataSource = self
+        settupDimensionPicker()
         serverTimeSwitch.isOn = UserDefaults.standard.object(forKey: "Server Time") as? Bool ?? true
     }
     
     
     @IBAction func resetSettings(_ sender: UIButton) {
+        UserDefaults.standard.set(true, forKey: "Server Time")
+        serverTimeSwitch.isOn = true
+        
+        dimensionPicker.selectRow(5, inComponent: 0, animated: true)
+        dimensionPicker.selectRow(5, inComponent: 1, animated: true)
+        
+        self.view.setNeedsDisplay()
+        
     }
     
     @IBAction func applySettings(_ sender: UIButton) {
@@ -45,6 +52,26 @@ class SettingsViewController: UIViewController{
         
         //Dismiss current view controller
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func settupDimensionPicker(){
+        dimensionPicker.delegate = self
+        dimensionPicker.dataSource = self
+        var initialRowForXDimension =
+            UserDefaults.standard.integer(forKey: "xDimension")
+        var initialRowForYDimension = UserDefaults.standard.integer(forKey: "yDimension")
+        
+        if initialRowForXDimension == 0{
+            //Default value
+            initialRowForXDimension = 10
+        }
+        
+        if initialRowForYDimension == 0{
+            initialRowForYDimension = 10
+        }
+        
+        dimensionPicker.selectRow(initialRowForXDimension - 5, inComponent: 0, animated: true)
+        dimensionPicker.selectRow(initialRowForYDimension - 5, inComponent: 1, animated: true)
     }
     
 }

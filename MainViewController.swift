@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objcMembers
 class MainViewController: UIViewController {
     
     @IBOutlet weak var serverTimeLabel: UILabel!
@@ -82,7 +83,6 @@ class MainViewController: UIViewController {
         notificationCenter.addObserver(forName: Notification.Name("Bonus Points"), object: nil, queue: nil, using: catchBonusPointsNotification)
         notificationCenter.addObserver(forName: Notification.Name("Penalty Points"), object: nil, queue: nil, using: catchPenaltyPointsNotification)
         notificationCenter.addObserver(forName: Notification.Name("Start Game"), object: nil, queue: nil, using: startGame)
-        
         getDate()
     }
     
@@ -142,8 +142,12 @@ class MainViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(MainViewController.stepper), userInfo: nil, repeats: true)
     }
     
-    func stepper(){
-        gameTimeLabel.text = "\(timeSeconds):\(timeMileseconds)"
+    @objc func stepper(){
+        if timeSeconds < 10{
+            gameTimeLabel.text = "0\(timeSeconds):\(timeMileseconds)0"
+        } else {
+            gameTimeLabel.text = "\(timeSeconds):\(timeMileseconds)0"
+        }
         if timeSeconds == 0 && timeMileseconds == 0{
             finishGame()
             return
@@ -174,7 +178,7 @@ class MainViewController: UIViewController {
         isGameStarted = false
         timer.invalidate()
         //Add score into database
-        ScoreViewModel.addScoreInCoreData(penaltyPoints: penaltyPoints, bonusPoints: bonusPoints, totalTime: "\(totalTimeSeconds):\(totalTimeMileseconds)0", serverTime: "")
+        ScoreViewModel.addScoreInCoreData(penaltyPoints: penaltyPoints, bonusPoints: bonusPoints, totalTime: "\(totalTimeSeconds):\(totalTimeMileseconds)0", serverTime: serverTimeLabel.text!)
         
         timeMileseconds = 0
         timeSeconds = 5
@@ -189,7 +193,11 @@ class MainViewController: UIViewController {
     }
     
     private func showResults(){
-        let alertVC = UIAlertController(title: "Game Over", message: "Total Time : \n \(totalTimeSeconds):\(totalTimeMileseconds)0", preferredStyle: .alert)
+        let alertVC = UIAlertController(
+            title: "Game Over",
+            message: "Total Time : \n \(totalTimeSeconds):\(totalTimeMileseconds)0 \n Bonus Points: \(bonusPoints)\n Penalty Points : \(penaltyPoints)",
+            preferredStyle: .alert)
+        
         let doneAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alertVC.addAction(doneAction)
         present(alertVC, animated: true, completion: nil)
@@ -230,7 +238,7 @@ class MainViewController: UIViewController {
                     if let timestamp = (json["data"] as! [String : Any])["timestamp"] as? Double{
                         self.timestamp = timestamp
                         //Run timer
-                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MainViewController.serverTimeTimerStepper), userInfo: nil, repeats: true)
+                        self.serverTimetimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MainViewController.serverTimeTimerStepper), userInfo: nil, repeats: true)
                     }
                     
                 } catch{

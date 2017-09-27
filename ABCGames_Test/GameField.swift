@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AudioToolbox
 
-@IBDesignable class GameField : UIView{
+class GameField : UIView{
     var xDimension : Int = {
         let value : Int? = UserDefaults.standard.object(forKey: "xDimension") as? Int
         if let unwrappedValue = value{

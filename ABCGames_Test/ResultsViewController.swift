@@ -36,7 +36,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Score Cell", for: indexPath) as! ScoreTableViewCell
         cell.bonusPointsLabel.text = "\(scores[indexPath.row].bonusPoints)"
         cell.penaltyPointsLabel.text = "\(scores[indexPath.row].penaltyPoints)"
-        cell.serverTimeLabel.text = "20:20"
+        cell.serverTimeLabel.text = scores[indexPath.row].serverTime ?? "00:00"
         cell.totalTimeLabel.text = scores[indexPath.row].totalTime ?? "0"
         return cell
     }
